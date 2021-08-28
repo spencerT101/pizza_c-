@@ -36,6 +36,11 @@ namespace contoso_pizza.Controllers
         // returns single pizza by id.
 
         // POST action
+        [HttpPost]
+        public IActionResult Create(Pizza pizza)
+        {
+            
+        }
 
         // PUT action
 
