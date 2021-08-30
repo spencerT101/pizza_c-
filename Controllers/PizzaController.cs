@@ -40,7 +40,7 @@ namespace contoso_pizza.Controllers
         public IActionResult Create(Pizza pizza)
         {
            PizzaService.Add(pizza);
-           return CreatedAtAction(nameof(Create), new {id = Pizza.Id}, pizza)
+           return CreatedAtAction(nameof(Create), new {id = pizza.Id}, pizza);
         }
         // Creates a new pizza
 
@@ -66,8 +66,15 @@ namespace contoso_pizza.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-         PizzaService.Add(pizza);
-         return CreatedAtAction(nameof(Create), new {id = Pizza.Id}, pizza)  
+         var pizza = PizzaService.Get(id);
+
+         if (pizza is null)
+             return NotFound();
+         
+         PizzaService.Delete(id);
+
+         return  Content("go fuck your self");
+          
         }
         // This code will delete the pizza and return a result
     }
