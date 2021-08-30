@@ -39,11 +39,36 @@ namespace contoso_pizza.Controllers
         [HttpPost]
         public IActionResult Create(Pizza pizza)
         {
-            
+           PizzaService.Add(pizza);
+           return CreatedAtAction(nameof(Create), new {id = Pizza.Id}, pizza)
         }
+        // Creates a new pizza
 
         // PUT action
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, Pizza pizza)
+        {
+           if(id != pizza.Id)
+               return BadRequest();
+            
+            var existingPizza = PizzaService.Get(id);
+            if(existingPizza is null)
+                return NotFound();
+            
+            PizzaService.Update(pizza);
 
-        // DELETE acti
+            return NoContent();
+           
+        }
+        // This code will update the pizza and return a result
+
+        // DELETE action
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+         PizzaService.Add(pizza);
+         return CreatedAtAction(nameof(Create), new {id = Pizza.Id}, pizza)  
+        }
+        // This code will delete the pizza and return a result
     }
 }
